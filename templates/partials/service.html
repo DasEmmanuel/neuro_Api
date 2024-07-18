@@ -1,0 +1,912 @@
+{% extends 'basic/base.html' %}{% load static %}
+{% block title %}
+
+Service
+
+{% endblock %}
+
+{% block body %}
+<!-- <br><br>
+ <div class="row">
+    <div class="col-sm-6">
+        <h5>Left side</h5>
+        <div class="row">
+            <div class="col-sm-6" >
+                <div class="select-container">
+                    <select class="lang" aria-label="Default select example" id="lang">
+                        <option selected>Select Language</option>
+                        <option value="telugu">Telugu</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="english">English</option>
+                      </select>
+                  </div>
+            </div>
+
+            <div class="col-sm-6" >
+                <div class="choosefile">
+                    <input type="file" name="file" id="myInput" ng-change="fs.uploadFiles(new_files)" class="uploadsInputs" style="color: #ff7200;" value="Upload File" required>
+                </div><br>
+                <div>
+                    <button class="button" onclick="fileUploadSend()">Submit</button>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="col-sm-6" id="video_players" >
+            video player
+            <video width="100%" height="240" controls>
+              </video>
+        </div>
+
+        <p id="ptags" ></p>
+
+        <span id="statusInsert"></span>
+        
+        <div class="col-sm-6">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Videos" id="videos" name="videos">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <button class="button-search-videos" onclick="searchVideos()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            
+                        </span>
+                        
+                    </div>
+                </div>
+                
+            
+
+            
+            
+            <div class="videos-list">
+
+                <h2>Video Lists</h2>
+                
+            </div><br>
+            <div  id="dataInsert">
+
+            </div>
+            
+            
+            
+
+            
+            
+        </div>
+    </div>
+    
+    <div class="col-sm-6">
+        <h5>Right side</h5>
+        <span id="keywordInsert"></span>
+        <div class="col-sm-12">
+            <div class="input-group mb-3">
+                <input type="text" id="findKeyword" class="form-control" placeholder="Search Keywords" id="videos" name="videos">
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <button class="button-search-videos" onclick="searchKeywordsData()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        
+                    </span>
+                    
+                </div>
+                
+            </div>
+        
+        <div class="col-sm-12">
+            <ul id="rightInsert">
+
+            </ul>
+        </div>
+         <div class="col-sm-12">
+            <ul id="rightKeywords">
+                Keywords
+            </ul>
+        </div>
+        <div class="col-sm-12" id="insertTexts"></div>
+        <div class="col-sm-12" id="textPlay"></div>
+        <div class="col-sm-12" id="textEdits"></div> -->
+        
+        <!-- <ul class="nav nav-pills a">
+            <li class="" style="margin-right: 12px;">
+                <a href="#1a" style="
+                    text-decoration: none;" data-toggle="tab">
+                    <i class="fa fa-files-o transcripticonsub" aria-hidden="true" title="Copy"></i>
+                    copy
+                </a>
+            </li>
+            <li><a style="
+                    text-decoration: none;
+                    " href="#2a" data-toggle="tab"><i class="fa fa-pencil-square transcripticonsub"
+                        title="Edit" aria-hidden="true"></i>edit</a>
+                    </li>
+                    <li><a style="
+                    text-decoration: none;
+                    " href="#3a" data-toggle="tab"><i
+                        class="fa fa-download transcripticonsubd exportbutton" aria-hidden="true"
+                        title="Download"></i> print </a>
+                    </li>
+                </ul>
+                
+                <div class="tab-content clearfix" style="width: 100%;">
+                    <div class="tab-pane active displaytexts" id="1a">
+                        <h2 id="insertTexts"
+                        style="font-size: 18px;color:black;padding-right: 20px;height:200px;overflow: auto;width:98%;background: white;text-align: justify;">
+                        
+                    </div>
+                    <div class="tab-pane active displaytexts" id="2a">
+                        <h2 id="textPlay"
+                        style="font-size: 18px;color:black;padding-right: 20px;height:200px;overflow: auto;width:98%;background: white;text-align: justify;">
+                        display text
+                    </div>
+                    <div class="tab-pane active displaytexts" id="3a">
+                        <h2 id="desplayText"
+                        style="font-size: 18px;color:black;padding-right: 20px;height:200px;overflow: auto;width:98%;background: white;text-align: justify;">
+                        
+                    </div>
+                </div> -->
+                
+                
+                <!-- <div class="col-sm-2">
+                    <button  class="btnn_log" data-toggle="modal" data-target="#myModal">Add Keywords</button>
+                </div><br>
+                <div class="col-sm-12" >
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Keywords</th>
+                    <th scope="col">Count</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tableInsert"></tbody>
+              </table>
+        </div> 
+    </div>
+ </div>-->
+   <!-- Modal 1-->
+   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add keywords</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <br>
+        <div class="modal-body">
+          <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" placeholder="Enter keywords" type="text" id="textEnter">
+            </label>
+          </div>
+        </div>
+        <br>
+        <div class="button_field">
+            <button class="button" onclick="textSubmit()">Add</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModalEdits" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Edit keywords</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group form-check">
+            <label class="form-check-label"><b>Text:</b></label>
+            <div>
+                <input class="form-check-input" placeholder="Current Text" type="text" id="prefilledText" value="">
+            </div>
+          </div><br><br>
+          <div class="form-group form-check">
+            <label class="form-check-label"><b>Edit Text as:</b></label>
+            <div>
+                <input class="form-check-input" placeholder="Edit Text as" type="text" id="editedText" value="">
+            </div>
+          </div>
+        </div><br>
+        <div class="button_field">
+            <button type="submit" class="button" onclick="submitEditedText()">Edit</button>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<!-- CSS Grid -->
+
+<div class="Service-container">
+    <!-- <div id="SideNav">SideNav
+
+    </div> -->
+
+    <div align="center" id="video_player">video_player
+
+        <div class="row">
+            <div class="col-sm-6" >
+                <div class="select-container">
+                    <select class="lang" aria-label="Default select example" id="lang">
+                        <option selected>Select Language</option>
+                        <option value="telugu">Telugu</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="english">English</option>
+                      </select>
+                  </div>
+            </div>
+
+            <div class="col-sm-6" >
+                <div class="choosefile">
+                    <input type="file" name="file" id="myInput" ng-change="fs.uploadFiles(new_files)" class="uploadsInputs" style="color: #ff7200;" value="Upload File" required>
+                </div><br>
+                <div>
+                    <button class="button" onclick="fileUploadSend()">Submit</button>
+                </div>
+            </div>
+            
+        </div><br>
+        <div class="col-sm-9" id="video_players" >
+            video player
+            <video width="100%" height="300" controls>
+              </video>
+        </div>
+
+    </div>
+
+    <div id="keywords" align="justify">keywords
+        <div class="col-sm-6">search
+            <div class="input-group mb-3">
+                <input type="text" id="findKeyword" class="form-control" placeholder="Search Keywords" id="videos" name="videos">
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <button class="button-search-videos" onclick="searchKeywordsData()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="div_scrolls_sideText">
+            <h5>Right side</h5>
+            <span id="keywordInsert"></span>
+            <div class="col-sm-12">
+                
+            
+            <div class="col-sm-12">
+                <ul id="rightInsert">
+    
+                </ul>
+            </div>
+             <div class="col-sm-12">
+                <ul id="rightKeywords">
+                    Keywords
+                </ul>
+            </div>
+            <div class="col-sm-12" id="insertTexts"><h3>Plain Text appears here</h3></div><br>
+            <div class="col-sm-12" id="textPlay"><h3>Play Text here</h3></div><br>
+            <div class="col-sm-12" id="textEdits"><h3>Edit Text here</h3></div><br>
+        </div>
+    </div>
+    </div>
+
+    <div id="video_list" align="left">video_list
+
+        <span id="statusInsert"></span>
+        
+        <div class="col-sm-6">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Videos" id="videos" name="videos">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <button class="button-search-videos" onclick="searchVideos()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            
+                        </span>
+                        
+                    </div>
+                </div>
+                <div class="videos-list">
+
+                    <h2>Video Lists</h2>
+                    
+                </div><br>
+                <div class="div_scrolls">
+                    <div  id="dataInsert">
+        
+                    </div>
+                </div>
+        </div>
+
+    </div>
+
+    <div id="table">table
+
+        <div class="col-sm-2">
+            <button  class="btnn_log" data-toggle="modal" data-target="#myModal">Add Keywords</button>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Keywords</th>
+                <th scope="col">Count</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tableInsert"></tbody>
+          </table>
+
+    </div>
+</div>
+
+
+
+
+<!-- CSS Grid End -->
+
+<script>
+
+
+var userId = localStorage.getItem('id')
+var userName = localStorage.getItem('userData')
+var userObjects = [{
+userId,userName
+  }]
+
+  var statusInserts=""
+  var dataInserts=""
+  var dataKeywordsInserts=""
+  searchVideosAll()
+  function searchVideosAll()
+{
+    statusInserts=""
+    dataInserts=""    
+    
+        var formSearch = new FormData();
+
+        formSearch.append("userId",userObjects[0].userId);
+        formSearch.append("videoSearch",$("#videos").val());
+        
+
+        var settings = {
+            "url": "/searchVideos/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formSearch
+        };
+
+        $.ajax(settings).done(function (responseUpload) {
+            // console.log(responseUpload,"----------line 239")
+            var convertingParse = JSON.parse(responseUpload)
+            if (convertingParse.status == "200") {
+
+                var searchVideoData = convertingParse.context
+                for(i=0;i<searchVideoData.length;i++)
+                {
+                    dataInserts+=`<div class="FileDetails"><ul><li type="button"  onclick="fileDetails('${searchVideoData[i].file_Name}','${searchVideoData[i].video_player}','${searchVideoData[i].video_text.trim()}','${searchVideoData[i].fileId}')" />`+searchVideoData[i].file_Name +`</li></ul></div>`                
+                    //dataInserts+=`<li type="button" onclick='fileDetails("${searchVideoData[i].file_Name}","${searchVideoData[i].video_player}","${searchVideoData[i].video_text.trim().replace("it's","it s")}","${searchVideoData[i].fileId}")' />`+searchVideoData[i].file_Name +`</li> <br/>`                
+                }
+                $("#dataInsert").html(dataInserts)
+            }
+            else{
+                 statusInserts+=`<div class="alert alert-danger" role="alert">`+convertingParse.message+`</div>`
+                // statusInserts+=`<div class="alert"><span class="fas fa-exclamation-circle"><span class="msg">`+convertingParse.message+`</span></span></div>`
+                // statusInserts+=`<div class="alert"><span class="fas fa-exclamation-circle"><span class="msg">No keywords found</span></span></div>`
+                $("#statusInsert").html(statusInserts)
+            }
+
+        });
+}
+
+function searchVideos()
+{
+    statusInserts=""
+    dataInserts=""    
+    
+        var formSearch = new FormData();
+
+        formSearch.append("userId",userObjects[0].userId);
+        formSearch.append("videoSearch",$("#videos").val());
+        
+
+        var settings = {
+            "url": "/searchVideos/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formSearch
+        };
+
+        $.ajax(settings).done(function (responseUpload) {
+            // console.log(responseUpload,"----------line 239")
+            var convertingParse = JSON.parse(responseUpload)
+            if (convertingParse.status == "200") {
+
+                var searchVideoData = convertingParse.context
+                for(i=0;i<searchVideoData.length;i++)
+                {
+                    dataInserts+=`<div class="FileDetails"><ul><li type="button"  onclick="fileDetails('${searchVideoData[i].file_Name}','${searchVideoData[i].video_player}','${searchVideoData[i].video_text.trim()}','${searchVideoData[i].fileId}')" />`+searchVideoData[i].file_Name +`</li></ul></div>`                
+                    //dataInserts+=`<li type="button" onclick='fileDetails("${searchVideoData[i].file_Name}","${searchVideoData[i].video_player}","${searchVideoData[i].video_text.trim().replace("it's","it s")}","${searchVideoData[i].fileId}")' />`+searchVideoData[i].file_Name +`</li> <br/>`                
+                }
+                $("#dataInsert").html(dataInserts)
+                $("#statusInsert").html("")
+            }
+            else{
+                statusInserts+=`<div class="alert alert-danger" role="alert">`+convertingParse.message+`</div>`
+                // statusInserts+=`<div class="alert"><span class="fas fa-exclamation-circle"><span class="msg">`+convertingParse.message+`</span></span></div>`
+                $("#statusInsert").html(statusInserts)
+            }
+
+        });
+}
+
+
+    
+    function fileUploadSend()
+    {
+        var languages = $("#lang").val()
+        
+        var myInput = document.getElementById('myInput')
+        const[file] = myInput.files
+        
+        
+        fileName = file.name
+        var form = new FormData();
+        form.append("choose_language", languages);
+        form.append("file", file, file.name);
+
+        var settings = {
+            "url": "https://speech.nuronics.com:9990/kab_asr",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+            
+            var saveResponse = JSON.parse(response)
+            
+            var saveResponseJson = saveResponse.url_json
+            var saveResponseText = saveResponse.url_text
+            
+
+            
+            
+            var saveMessages = saveResponse.duration
+            var durationSplit = saveMessages.split(":")
+
+
+            
+            hours = Number(durationSplit[0])
+            
+
+            
+            min = Number(durationSplit[1])
+            
+
+            
+            sec = Number(durationSplit[2])
+        
+
+            totlaMillisecconvert = ((hours * 60 * 60) + (min * 60) + sec + 10) * 1000 + 5 + 50
+            
+           
+
+            var testFormats = setTimeout(testUrls,totlaMillisecconvert,saveResponseJson,saveResponseText)
+            
+
+            function testUrls(urls_Json,languages, urls_text)
+    {
+        
+        
+        var settingsJson = {
+            "url": urls_Json,
+            "method": "GET",
+            "timeout": 0,
+        };
+        
+        $.ajax(settingsJson).done(function (response_json) {
+            urlText(response_json,urls_text,file,fileName)
+        });
+        function urlText(response_json,urls_text,file,fileName)
+        {
+            
+            var settingsTexts = {
+            "url": saveResponseText,
+            "method": "GET",
+            "timeout": 0,
+        };
+        
+        $.ajax(settingsTexts).done(function (response_text) {
+            
+            finalFileUpload(response_json)
+            function finalFileUpload(response_json)
+            {
+                var formUploads = new FormData();
+        formUploads.append("userId", userObjects[0].userId);
+        formUploads.append("languages", $("#lang").val());
+        formUploads.append("fileName", fileName);
+        formUploads.append("video_text", response_text);
+        formUploads.append("video_json", JSON.stringify(response_json));
+        formUploads.append("video_paths",file, fileName);
+
+        var settings = {
+        "url": "/fileUploads/",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": formUploads
+        };
+
+        $.ajax(settings).done(function (responseUpload) {
+        
+
+        }); 
+            }
+        });
+        }
+        
+        
+        
+        
+    }
+        });
+
+    }
+
+    
+
+    var tablesInserts = ""
+    var pushJsonFiles = []
+    var globalVideoId = 0
+    var tablesWordsArray = []
+    var convertingTextObjects=[]
+    var editNormalText=""
+    function fileDetails(file_Name, video_player, video_text, fileId){
+
+        var formJson = new FormData();
+        formJson.append("fileId", fileId);
+        
+
+        var settings = {
+            "url": "/individualVideos/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formJson
+        };
+
+        $.ajax(settings).done(function (responseJson) {
+            var responseJsonParse = JSON.parse(responseJson)
+            // console.log(responseJsonParse,"line======403")
+            var responsejson = responseJsonParse.context
+            console.log(responsejson.video_json,"line======405")
+        
+        editNormalText=""
+        editNormalText = video_text
+        tablesWordsArray = []
+        tablesInserts = ""
+        globalVideoId = fileId
+
+        var videoHtml = ""
+
+        videoHtml +=` <video width="100%" height="240" controls id="VideoPlays">
+            <source src="`+ video_player +`" type="video/mp4">
+        </video> `
+        $("#video_players").html(videoHtml)
+        
+        $("#insertTexts").html(video_text)
+
+        var formTables = new FormData();
+        formTables.append("userId", userObjects[0].userId);
+        formTables.append("fileId", fileId);
+
+        var settings = {
+        "url": "/Default_keywords/",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": formTables
+        };
+
+        $.ajax(settings).done(function (responseTables) {
+        var convertingParseTables = JSON.parse(responseTables)
+        console.log(convertingParseTables,"line----------363")
+
+        var tableInsertData = convertingParseTables.myTablesData
+        for(i = 0 ; i < tableInsertData.length ; i++){
+            var textDetails = video_text
+            var regExp = new RegExp(tableInsertData[i].keywords,'g')
+            var matchResults = textDetails.match(regExp)
+            var keywordscount = matchResults == null ? 0 : matchResults.length
+
+
+            var formUpdateKeywords = new FormData();
+            formUpdateKeywords.append("fileId", tableInsertData[i].asrKeywordsId);
+            formUpdateKeywords.append("keywordscount", keywordscount);
+            formUpdateKeywords.append("textEnters", tableInsertData[i].keywords);
+        
+        
+
+        var settings = {
+            "url": "/UpdategraphKeywords/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formUpdateKeywords
+        };
+
+        $.ajax(settings).done(function (responseUpdates) {
+            console.log(responseUpdates)
+        });
+
+
+            tablesInserts += `
+                  <tr>
+                    <th scope="row">` + i + `</th>
+                    <td>` + tableInsertData[i].keywords + `</td>
+                    <td>` + keywordscount + `</td>
+                    <td> <i class="fa-solid fa-trash" onclick="deleteKeywords(`+ tableInsertData[i].asrKeywordsId+ `)"></i></td>
+                            </tr>        
+                    `
+                tablesWordsArray.push(tableInsertData[i].keywords)
+            }
+
+            
+
+            var editWords=" "
+            var tablesWordsArrays = convertingParseTables.tablesArray
+            
+            var convertingToObject = JSON.parse(responsejson.video_json)
+        
+
+            convertingTextObjects = convertingToObject
+            
+            var totalwords = tablesWordsArray.map(
+                function (word) { return word })
+            var compareWords = convertingToObject.map(function (result) {
+                return totalwords.indexOf(result.text) >= 0 ? ` <a class="adjs" href="#" onclick=gotoPositions(`+ result.start + `,`+ result.end + `)> ` + result.text + ` </a> ` : ` <a class="" href="#" onclick=gotoPositions(`+ result.start + `,`+ result.end + `)> ` + result.text + ` </a> `
+            })
+
+            for(i=0;i<convertingToObject.length;i++)
+            {
+                editWords+= `
+                <a  data-toggle="modal" data-target="#myModalEdits" onclick=updatekeys("`+convertingTextObjects[i].text+`","`+i+`")>`+convertingTextObjects[i].text+`</a>
+                `
+            }
+            
+            $("#textPlay").html(compareWords.join(' '))
+            $("#textEdits").html(editWords)
+
+
+            $("#tableInsert").html(tablesInserts)
+            //  $("#rightInsert").html("")
+            // $("#rightKeywords").html("")
+        });
+        });
+    }
+
+    var textGlobal=""
+    var indexGlobal=0
+    function updatekeys(text,index){
+
+        textGlobal = text
+        indexGlobal = index
+
+        $("#prefilledText").attr("value",text)
+        var currentText = $("#prefilledText").val()
+        
+
+    }
+    function submitEditedText()
+    {
+        var updatedText = $("#editedText").val()
+
+
+        var postUpdatedText = { "end": convertingTextObjects[indexGlobal].end, "start": convertingTextObjects[indexGlobal].start, "text": updatedText }
+    
+
+        convertingTextObjects[indexGlobal] = postUpdatedText
+        
+
+        //text setting
+
+    
+
+        const myArray = editNormalText.split(" ")
+        myArray[indexGlobal] = updatedText
+        let text = myArray.toString();
+        var finalEditedText = myArray.join(' ')
+        
+
+        // finalEditedText set
+
+        var formTextUpdate = new FormData();
+        formTextUpdate.append("globalVideoId", globalVideoId);
+        formTextUpdate.append("finalEditedText", finalEditedText);
+        formTextUpdate.append("convertingTextObjects", JSON.stringify(convertingTextObjects));
+        
+
+        var settings = {
+            "url": "/file_keywords_update/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formTextUpdate
+        };
+
+        $.ajax(settings).done(function (responseDelete) {
+            var parseresponseTextEnter = JSON.parse(responseDelete)
+
+            var fileDeatailsValues = parseresponseTextEnter.myvideosData
+                fileDetails(fileDeatailsValues[0].file_Name, fileDeatailsValues[0].video_player, fileDeatailsValues[0].video_text, fileDeatailsValues[0].fileId)
+
+        });
+
+    }
+
+    function textSubmit(){
+
+        var textEnters = $("#textEnter").val()
+        random = "#" + Math.floor(Math.random()*16777215).toString(16);
+
+
+        var formTextEnter = new FormData();
+        formTextEnter.append("userId",userObjects[0].userId);
+        formTextEnter.append("fileId", globalVideoId);
+        formTextEnter.append("textEnters", textEnters);
+        formTextEnter.append("graphColours", random);
+
+        var settings = {
+            "url": "/add_keywords/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formTextEnter
+        };
+
+        $.ajax(settings).done(function (responseTextEnter) {
+            var parseresponseTextEnter = JSON.parse(responseTextEnter)
+            if (parseresponseTextEnter.status == 400) {
+                
+                var fileDeatailsValues = parseresponseTextEnter.myvideosData
+                fileDetails(fileDeatailsValues[0].file_Name, fileDeatailsValues[0].video_player, fileDeatailsValues[0].video_text, fileDeatailsValues[0].fileId)
+                
+            }
+            else{
+                
+                var fileDeatailsValues = parseresponseTextEnter.myvideosData
+                fileDetails(fileDeatailsValues[0].file_Name, fileDeatailsValues[0].video_player, fileDeatailsValues[0].video_text, fileDeatailsValues[0].fileId)
+            }
+
+        });
+    }
+
+    function deleteKeywords(id){
+
+        var formTextDelete = new FormData();
+        formTextDelete.append("globalVideoId", globalVideoId);
+        formTextDelete.append("fileId", id);
+
+        var settings = {
+            "url": "/delete_keywords/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formTextDelete
+        };
+
+        $.ajax(settings).done(function (responseDelete) {
+            var parseresponseTextEnter = JSON.parse(responseDelete)
+            console.log(parseresponseTextEnter,"line-------------528")
+            
+            var fileDeatailsValues = parseresponseTextEnter.myvideosData
+            fileDetails(fileDeatailsValues[0].file_Name, fileDeatailsValues[0].video_player, fileDeatailsValues[0].video_text, fileDeatailsValues[0].fileId)
+            
+
+        });
+    }
+
+
+
+    function gotoPositions(start, end) {
+        $('#VideoPlays')[0].currentTime = start;
+        $('#VideoPlays')[0].play()
+    }
+
+    function searchKeywordsData(){
+        var findKeywords = $("#findKeyword").val()
+        console.log(findKeywords,"line---------709")
+
+        var formFindText = new FormData();
+        formFindText.append("userId", userObjects[0].userId);
+        formFindText.append("findKeywords", findKeywords);
+
+        dataInserts=""
+        dataKeywordsInserts=""
+        statusInserts=""
+
+        var settings = {
+            "url": "/search_keywords/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formFindText
+        };
+
+        $.ajax(settings).done(function (responseFindText) {
+            console.log(responseFindText,"line-------726")
+
+var convertingParse = JSON.parse(responseFindText)
+if (convertingParse.status == "200") {
+
+var searchVideoData = convertingParse.myvideosData
+for(i=0;i<searchVideoData.length;i++)
+{
+    var searchKeywordJson = JSON.parse(searchVideoData[i].video_json)
+    console.log(searchKeywordJson,"Line----------747")
+
+    for(let index = 0 ; index < searchKeywordJson.length ; index++)
+    {
+        if(convertingParse.keywords == searchKeywordJson[index].text)
+        {
+            console.log(searchKeywordJson[index])
+            dataKeywordsInserts+=`<div class="fileDetails"><ul><li type="button" onclick="gotoPositions('${searchKeywordJson[index].start}','${searchKeywordJson[index].end}')" /><p>`+searchKeywordJson[index].text +`</p></li></ul></div>`                
+        }
+    }
+    dataInserts+=`<div class="FileDetails"><ul><li type="button" onclick="fileDetails('${searchVideoData[i].file_Name}','${searchVideoData[i].video_player}','${searchVideoData[i].video_text.trim()}','${searchVideoData[i].fileId}')" /><p>`+searchVideoData[i].file_Name +`</li></ul></div>`                
+    //dataInserts+=`<li type="button" onclick='fileDetails("${searchVideoData[i].file_Name}","${searchVideoData[i].video_player}","${searchVideoData[i].video_text.trim().replace("it's","it s")}","${searchVideoData[i].fileId}")' />`+searchVideoData[i].file_Name +`</li> <br/>`                
+}
+$("#rightInsert").html(dataInserts)
+$("#rightKeywords").html(dataKeywordsInserts)
+$("#keywordInsert").html("")
+}
+else{
+statusInserts+=`<div class="alert alert-danger" role="alert">`+convertingParse.message+`</div>`
+$("#keywordInsert").html(statusInserts)
+$("#rightInsert").html("")
+$("#rightKeywords").html("")
+}
+        });
+
+    }
+
+    
+</script>
+{% endblock %}

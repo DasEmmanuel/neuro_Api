@@ -1,0 +1,83 @@
+{% extends 'basic/base.html' %}{% load static %}
+{% block title %}
+
+Help
+
+{% endblock %}
+
+{% block body %}
+<div class="timeline">
+    <div class="container left-container">
+        <div class="text-box">
+            <img src="{% static 'css/add-user.png' %}" alt="">
+            <h2>Sign Up</h2>
+            <p>If you are a new user you need to Sign Up first<br>If you are an old user ther the console will alert you by showing " UserName already Exists"<br>Then you will be redirected to the Sign-In Page</p>
+            <span class="left-container-arrow"></span>
+        </div>
+    </div>
+    <div class="container right-container">
+        <div class="text-box">
+            <img src="{% static 'css/login.png' %}" alt="">
+            <h2>Sign In</h2>
+            <p>Sign In if you an existing user<br>On successful Sign In you will be redirected to the Service Page<br></p>
+            <span class="right-container-arrow"></span>
+        </div>
+    </div>
+    <div class="container right-container" >
+        <div class="text-box">
+            <img src="{% static 'css/service.png' %}" alt="">
+            <h2>Service Page</h2>
+            <p>On successful login you can use out services</p>
+            <ol>
+                <li>Select language</li>
+                <small>Language in which you want to convert your audio to text</small>
+                <li>Choose File</li>
+                <small>Choose the video/audio file for which you want to generate transcripts</small>
+                <li>Click Submit</li>
+            </ol>
+            <span class="right-container-arrow"></span>
+        </div>
+    </div>
+    <div class="container left-container">
+        <div class="text-box">
+            <img src="{% static 'css/transcription.png' %}" alt="">
+            <h2>Generate transcripts</h2>
+            <p>Wait for few minutes for the video to get uploaded<br>Once the video is uploaded then on the right side you an find the transcripts are generated<br></p>
+            <ol>
+                <li>Plain Text</li>
+                <small>Plain text for your transcripts are genrated which will help you to copy keywords</small>
+                <li>Play Text</li>
+                <small>text with anchor tags are genrated which will help you to navigate the video to your desired keyword</small>
+                <li>Edit Text</li>
+                <small>If the words in the transcripts are not generated accurately the you can edit the text</small>
+            </ol>
+            <span class="left-container-arrow"></span>
+        </div>
+    </div>
+    <div class="container right-container">
+        <div class="text-box">
+            <img src="{% static 'css/add.png' %}" alt="">
+            <h2>Add Keywords</h2>
+            <p>When certains keywords are repeating in the text then you can add keywords to find out their counts<br>Keyword counts are displayed in the count table<br>You can also delete the keywords simultaneously</p>
+            <span class="right-container-arrow"></span>
+        </div>
+    </div>
+    <div class="container right-container">
+        <div class="text-box">
+            <img src="{% static 'css/search.png' %}" alt="">
+            <h2>Search Keywords</h2>
+            <p>Search for keywords in a particular video or in entire videos' list<br></p>
+            <span class="right-container-arrow"></span>
+        </div>
+    </div>
+    <div class="container left-container">
+        <div class="text-box">
+            <img src="{% static 'css/analytics.png' %}" alt="">
+            <h2>Analytics page</h2>
+            <p>Your Videos, keywords, keyword counts are displayed in a graphical representation in the analytics page<br></p>
+            <span class="left-container-arrow"></span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

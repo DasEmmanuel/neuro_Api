@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroAPI</title>
+    <link rel="stylesheet" href="static\css\template.css">
+    <link rel="shortcut icon"
+        href="https://ik.imagekit.io/abhinesh/Nuopedia/Union_1_PS0DE_7wU.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1666777143967"
+        type="image/x-icon">
+</head>
+<body>
+    <!--<div class="main">-->
+        <div class="Index-container">
+            <header>
+                <div class="logo">
+                    <a href="http://127.0.0.1:8000/service/"><img src="static\css\logo.PNG" alt=""></a>
+                    <a href="http://127.0.0.1:8000/service/"><span class="logo-heading"><h3>NeuroAPI</h3></span></a>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="http://127.0.0.1:8000/register/">Sign Up</a></li>
+                        <li><a href="http://127.0.0.1:8000/login/">Sign In</a></li>
+                    </ul>
+                </nav>
+                <a href="http://127.0.0.1:8000/register/" class="cta"><button class="">Join Us</button></a>
+            </header>
+        </div>
+        <!--<div class="navbar">
+            <div class="icon">
+                <img src="static\css\logo.PNG" alt="">
+                <h2 class="logo"><a href="http://127.0.0.1:8000">Neuro API</a></h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/login">SIGN IN</a></li>
+                    <li><a href="http://127.0.0.1:8000/register/">SIGN UP</a></li>
+                    <li><a href="http://127.0.0.1:8000/contacts/">CONTACT</a></li>
+                </ul>
+            </div>
+
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type To text">
+                <a href="#"> <button class="btn">Search</button></a>
+            </div>-->
+
+        
+        <div class="content">
+            <h1>Automatic Speech Recognition<br><Span>your one stop destination</Span></h1><br><br>
+            <p class="par">Neuro API is a platform for converting the speech in your Audio / Video files into Text <br>i.e Transcripts
+                using ASR (Automatic Speech Recognition)</p>
+                <div class="side-img1">
+                    <img src="static\css\side-img.PNG" alt="">
+                </div>
+                <div class="robots">
+                    <img src="static\css\robots.PNG" alt="">
+                </div>
+                <div class="con2">
+                    <div class="child-con2">
+                        <h1>Automatic Speech Recognition<br><Span>your one stop destination</Span></h1><br><br>
+                <p class="par">Neuro API is a platform for converting the speech in your Audio / Video files into Text <br>i.e Transcripts
+                    using ASR (Automatic Speech Recognition)</p>
+                    </div>
+                    <div class="side-img2">
+                        <img src="static\css\side-img.PNG" alt="">
+                    </div>
+                </div>
+                <!--<div class="child-con2">
+                    <h1>Automatic Speech Recognition<br><Span>your one stop destination</Span></h1><br><br>
+            <p class="par">Neuro API is a platform for converting the speech in your Audio / Video files into Text <br>i.e Transcripts
+                using ASR (Automatic Speech Recognition)</p>
+                <div class="side-img2">
+                    <img src="static\css\side-img.PNG" alt="">
+                </div>
+                </div>-->
+
+                <!--<button class="btnn"><a href="signup.html">JOIN US</a></button>
+
+                <div class="form">
+                    <h2>Login Here</h2>
+                    <input type="email" name="email" placeholder="Enter User-Name Here" id="email">
+                    <input type="password" name="" placeholder="Enter Password Here" id="pwd">
+                    <button class="btnn_log" onclick="submitData()">Login</button>
+
+                    <p class="link">Don't have an account<br>
+                    <a href="http://127.0.0.1:8000/register/">Sign up </a> here</a></p>
+
+                    <div class="icons">
+                        <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+                    </div>
+
+                </div>-->
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!--<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>-->
+
+    <script>
+    window.addEventListener("scroll", function(){
+    var header = document.querySelector("header");
+    header.classList.toggle("sticky", window.scrollY > 0)
+    })
+    
+    function submitData(){
+
+            var email = $("#email").val()
+            var password = $("#pwd").val()
+
+            console.log(email,password,"----------- line 37")
+            var form = new FormData();
+            form.append("username", email);
+            form.append("passwordUser", password);
+            console.log(form, "---------------line 42")
+            var settings = {
+            "url": "/loginUrl/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": form
+            };
+
+            $.ajax(settings).done(function (response) {
+            console.log(response);
+            var convertingtoParse = JSON.parse(response)
+            console.log(convertingtoParse)
+            if (convertingtoParse.status == 200) {
+                localStorage.setItem('userData', convertingtoParse)
+                $("#recieveMessage").html(convertingtoParse.message)
+                window.location.href = 'http://127.0.0.1:8000/'
+            } else {
+                $("#recieveMessage").html(convertingtoParse.message)
+                window.location.href = 'http://127.0.0.1:8000/register/'
+            }
+            })
+        }
+    </script>
+</body>
+</html>

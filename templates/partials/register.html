@@ -1,0 +1,164 @@
+{% extends 'basic/base.html' %}{% load static %}
+{% block title %}
+
+Register
+
+{% endblock %}
+
+{% block body %}
+<br><br>
+<div class="main">
+  <div class="signup-box">
+    <h1>Sign Up</h1>
+    <form action="">
+      <div class="signup-input">
+        <div class="signup-input-field">
+          <i class="fa-solid fa-user fa-beat"></i>
+          <input type="text" class="form-control" placeholder="User Name" id="email">
+        </div>
+        <div class="signup-input-field">
+          <i class="fa-solid fa-lock fa-beat"></i>
+          <input type="text" class="form-control" placeholder="Password" id="pwd">
+        </div>
+        <div class="signup-input-field">
+          <i class="fa-solid fa-square-check fa-beat"></i>
+          <input type="text" class="form-control" placeholder="Confirm Password" id="Fname">
+        </div>
+        <div class="signup-input-field">
+          <i class="fa-solid fa-circle-user fa-beat"></i>
+          <input type="text" class="form-control" placeholder="Full Name" id="Mname">
+        </div>
+        <div class="signup-input-field">
+          <i class="fa-solid fa-suitcase fa-beat"></i>
+          <input type="text" class="form-control" placeholder="Profession" id="Lname">
+        </div>
+        <div class="signup-input-field">
+          <i class="fa-solid fa-phone fa-beat"></i>
+          <input type="text" class="form-control" placeholder="Phone Number" id="PHno">
+        </div>
+        <div class="signup-input-field">
+          <i class="fa-solid fa-envelope fa-beat"></i>
+          <input type="text" class="form-control" placeholder="E-mail" id="mail">
+        </div>
+      </div>
+      <!--<div class ="col-sm-12">
+                
+        <b><span id = "recieveMessage"></span></b>           
+      </div>-->
+    </form>
+    <div class="button_field">
+      <button type="submit" class="button" onclick="submitData()">Sign Up</button>
+    </div>
+    <div class ="col-sm-12">
+              
+      <b><span id = "recieveMessage"></span></b> 
+      <div>
+        <p><a href="http://127.0.0.1:8000">Back to Home?</a></p>
+    </div>
+    <div>
+      <p><a href="http://127.0.0.1:8000/login">Back to Login?</a></p>
+  </div>     
+    </div>
+  </div>
+</div>
+              
+<!--
+<div class="main">
+  <div class="signup-box">
+      <h1>Sign Up</h1>
+      <form action="">
+          <div class="signup-input">
+              <div class="signup-input-field">
+                  <i class="fa-solid fa-user fa-beat"></i>
+                  <input type="text" name="" id="email" placeholder="User Name">
+              </div>
+              <div class="signup-input-field">
+                  <i class="fa-solid fa-envelope fa-beat"></i>
+                  <input type="text" name="" id="mail" placeholder="Email">
+              </div>
+              <div class="signup-input-field">
+                  <i class="fa-solid fa-lock fa-beat" ></i>
+                  <input type="text" name="" id="pwd" placeholder="Password">
+              </div>
+              <div class="signup-input-field">
+                <i class="fa-solid fa-square-check fa-beat"></i>
+                  <input type="text" name="" id="Fname" placeholder="Confirm Password">
+              </div>
+              <div class="signup-input-field">
+                  <i class="fa-solid fa-phone fa-beat"></i>
+                  <input type="text" name="" id="PHno" placeholder="Phone Number">
+              </div>
+              <div class="signup-input-field">
+                <i class="fa-solid fa-circle-user fa-beat"></i>
+                <input type="text" name="" id="Mname" placeholder="Full-Name">
+            </div>
+            <div class="signup-input-field">
+              <i class="fa-solid fa-suitcase fa-beat"></i>
+              <input type="text" name="" id="Lname" placeholder="Profession">
+          </div>
+          </div>
+          <div class="button-field">
+              <button class="button" onclick="submitData()" >Sign Up</button>
+          </div><br>
+          <div>
+              <p><a href="http://127.0.0.1:8000">Back to Home?</a></p>
+          </div>
+          <div>
+            <p><a href="http://127.0.0.1:8000/login">Old User? Back to login</a></p>
+        </div>
+          <div class ="col-sm-12">
+                
+            <b><span id = "recieveMessage"></span></b>           
+          </div>
+      </form>
+  </div>
+</div>-->
+
+<script>
+    function submitData(){
+      
+
+        var email = $("#email").val()
+        var password = $("#pwd").val()
+        var Fname = $("#Fname").val()
+        var Mname = $("#Mname").val()
+        var Lname = $("#Lname").val()
+        var PHno = $("#PHno").val()
+        var mail = $("#mail").val()
+        
+
+        console.log(email,password,"----------- line 37")
+        var form = new FormData();
+        form.append("username", email);
+        form.append("passwordUser", password);
+        form.append("Fname", Fname);
+        form.append("Mname", Mname);
+        form.append("Lname", Lname);
+        form.append("PHno", PHno);
+        form.append("mail", mail);
+        console.log(form, "---------------line 42")
+        var settings = {
+          "url": "/registerUrl/",
+          "method": "POST",
+          "timeout": 0,
+          "processData": false,
+          "mimeType": "multipart/form-data",
+          "contentType": false,
+          "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+          var convertingtoParse = JSON.parse(response)
+          console.log(convertingtoParse)
+          if (convertingtoParse.status == 200) {
+            $("#recieveMessage").html(convertingtoParse.message)
+            window.location.href = 'http://127.0.0.1:8000/login'
+          } else {
+               $("#recieveMessage").html(convertingtoParse.message)
+          }
+        })
+    }
+</script>
+
+{% endblock %}

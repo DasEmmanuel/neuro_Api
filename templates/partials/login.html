@@ -1,0 +1,121 @@
+{% extends 'basic/base.html' %}{% load static %}
+{% block title %}
+
+Login
+
+{% endblock %}
+
+{% block body %}
+<div class="main">
+  <div class="signup-box">
+    <h1>Sign In</h1>
+    <form action="">
+      <div class="signup-input">
+        <div class="signup-input-field">
+          <i class="fa-solid fa-user fa-beat"></i>
+          <input type="text" class="form-control" placeholder="User Name" id="email">
+        </div>
+        <div class="signup-input-field">
+          <i class="fa-solid fa-lock fa-beat"></i>
+          <input type="text" class="form-control" placeholder="Password" id="pwd">
+        </div>
+      </div>
+      <!--<div class ="col-sm-12">
+                
+        <b><span id = "recieveMessage"></span></b>           
+      </div>-->
+    </form>
+    <div class="button_field">
+      <button type="submit" class="button" onclick="submitData()">Sign In</button>
+    </div>
+    <div class ="col-sm-12">
+              
+      <b><span id = "recieveMessage"></span></b> 
+      <div>
+        <p><a href="http://127.0.0.1:8000">Back to Home?</a></p>
+    </div>
+    <div>
+      <p><a href="http://127.0.0.1:8000/register">Forgot Password?</a></p>
+  </div> 
+    <div>
+      <p><a href="http://127.0.0.1:8000/register">New User?, Register</a></p>
+  </div>     
+    </div>
+  </div>
+</div>
+<!--<div class="main">
+  <div class="signup-box">
+      <h1>Login</h1>
+      <form action="">
+          <div class="signup-input">
+              <div class="signup-input-field">
+                  <i class="fa-solid fa-user fa-beat"></i>
+                  <input type="text" name="" id="email" placeholder="User Name">
+              </div>
+              <div class="signup-input-field">
+                  <i class="fa-solid fa-lock fa-beat"></i>
+                  <input type="text" name="" id="pwd" placeholder="Password">
+              </div>
+          </div>
+          <div class="button-field">
+              <button class="button" onclick="submitData()" >Login</button>
+          </div><br>
+          <div>
+              <p><a href="http://127.0.0.1:8000">Back to Home?</a></p>
+          </div>
+          <div>
+            <p><a href="http://127.0.0.1:8000/register">Forgot Password?</a></p>
+        </div>
+          <div>
+            <p><a href="http://127.0.0.1:8000/register">New User?, Register</a></p>
+        </div>
+          <div class ="col-sm-12">
+                
+            <b><span id = "recieveMessage"></span></b>           
+          </div>
+      </form>
+  </div>
+</div>-->
+
+<script>
+    function submitData(){
+
+        var email = $("#email").val()
+        var password = $("#pwd").val()
+
+        console.log(email,password,"----------- line 37")
+        var form = new FormData();
+        form.append("username", email);
+        form.append("passwordUser", password);
+        console.log(form, "---------------line 42")
+        var settings = {
+          "url": "/loginUrl/",
+          "method": "POST",
+          "timeout": 0,
+          "processData": false,
+          "mimeType": "multipart/form-data",
+          "contentType": false,
+          "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+          var convertingtoParse = JSON.parse(response)
+          var userDetails = convertingtoParse.userDetails
+          console.log(convertingtoParse)
+          if (convertingtoParse.status == 200) {
+            $("#recieveMessage").html(convertingtoParse.message)
+            localStorage.setItem('id', userDetails[0].id)
+            localStorage.setItem('userData', userDetails[0].userName)
+            console.log(convertingtoParse,"-----line 110")
+            window.location.href = 'http://127.0.0.1:8000/service/'
+          } else {
+            window.location.href = 'http://127.0.0.1:8000/register/'
+            $("#recieveMessage").html(convertingtoParse.message)
+          }
+        })
+    }
+</script>
+
+
+{% endblock %}

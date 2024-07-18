@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200;1,300&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+header nav li, a, button {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+
+}
+header .logo .logo-heading {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+header .logo img {
+    width: 60px;
+    height:  60px;
+    cursor: pointer;
+}
+header .logo {
+    margin-right: auto;
+}
+header
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5px 5px;
+    box-shadow: 35px 0 15px rgba(19, 18, 18, 0.1);
+}
+header nav .nav-links
+{
+    list-style: none;
+}
+header nav .nav-links li
+{
+    display: inline-block;
+    padding: 0px 20px;
+}
+header nav .nav-links li a {
+    font-weight: bold;
+    transition: all 0.3s ease 0s;
+}
+header nav .nav-links li a:hover{
+    color: #ff7500;
+}
+header button{
+    padding: 9px 25px;
+    background-color: white;
+    border: 2px solid #ff7500;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .4s ease 0s;
+    font-weight: bold;
+}
+header button:hover {
+    background-color: #ff7500;
+}

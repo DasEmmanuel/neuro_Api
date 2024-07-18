@@ -1,0 +1,190 @@
+{% extends 'basic/base.html' %}{% load static %}
+{% block title %}
+
+Graphs
+
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-sm-6">
+    
+    <span id="statusInsert"></span>
+        
+        <div class="col-sm-6">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Videos" id="videos" name="videos">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <button class="button-search-videos" onclick="searchVideos()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                            <!--<button type="submit" class="button">Search</button>-->
+                        </span>
+                        
+                    </div>
+                </div>
+                
+            
+
+            <!-- <div class="col-sm-12" id="dataInsert">
+            </div>
+            <li onclick="fileDetails(`{{data.file_Name}}`,`{{data.video_player}}`,`{{data.video_text}}`,`{{data.video_json}}`,`{{data.fileId}}`)"><p> {{data.file_Name}}</p> </li> -->
+            
+            <div class="videos-list">
+
+                <h2>Video Lists</h2>
+                
+            </div><br>
+            <div class="div_scrolls">
+                <div  id="dataInsert">
+
+                </div>
+            </div>
+            
+            <!-- <div class="fileDetails" id="dataInsert">
+                <ul>
+                    <li onclick="fileDetails(`{{data.file_Name}}`,`{{data.video_player}}`,`{{data.video_text}}`,`{{data.video_json}}`,`{{data.fileId}}`)"><p> {{data.file_Name}}</p> </li>
+                </ul>
+            </div> -->
+            
+
+            
+            
+        </div>
+  </div>
+  <div class="col-sm-6">
+    <div id="barchart_values" class="unhide" style="width: 900px; height: 300px;"><h3>graph appears here</h3></div>
+  </div>
+</div>
+<script type="text/javascript">
+    
+
+var userId = localStorage.getItem('id')
+var userName = localStorage.getItem('userData')
+var userObjects = [{
+userId,userName
+}]
+
+var statusInserts=""
+searchVideos()
+function searchVideos()
+{
+    statusInserts=""
+    dataInserts=""    
+    
+        var formSearch = new FormData();
+
+        formSearch.append("userId",userObjects[0].userId);
+        formSearch.append("videoSearch",$("#videos").val());
+        
+
+        var settings = {
+            "url": "/searchVideos/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formSearch
+        };
+
+        $.ajax(settings).done(function (responseUpload) {
+            console.log(responseUpload,"----------line 239")
+            var convertingParse = JSON.parse(responseUpload)
+            if (convertingParse.status == "200") {
+
+                var searchVideoData = convertingParse.context
+                for(i=0;i<searchVideoData.length;i++)
+                {
+                    dataInserts+=`<div class="fileDetails"><ul><li type="button" onclick="fileDetails('${searchVideoData[i].file_Name}','${searchVideoData[i].video_player}','${searchVideoData[i].video_text.trim()}','${searchVideoData[i].fileId}')" /><p>`+searchVideoData[i].file_Name +`</p></li></ul></div>`                
+                    //dataInserts+=`<li type="button" onclick='fileDetails("${searchVideoData[i].file_Name}","${searchVideoData[i].video_player}","${searchVideoData[i].video_text.trim().replace("it's","it s")}","${searchVideoData[i].fileId}")' />`+searchVideoData[i].file_Name +`</li> <br/>`                
+                }
+                $("#dataInsert").html(dataInserts)
+                $("#statusInsert").html("")
+            }
+            else{
+                statusInserts+=`<div class="alert alert-danger" role="alert">`+convertingParse.message+`</div>`
+                $("#statusInsert").html(statusInserts)
+            }
+
+        });
+}
+
+var textEnters = $("#textEnter").val()
+        random = "#" + Math.floor(Math.random()*16777215).toString(16);
+
+
+    //   random = "#" + Math.floor(Math.random()*16777215).toString(16);
+    //   $("body").css("background-color", random);
+    //   alert(random)
+
+    function fileDetails(file_Name, video_player, video_text, fileId){
+
+        statusInserts=""
+        var formGraph = new FormData();
+        formGraph.append("fileId", fileId);
+        formGraph.append("userId", userObjects[0].userId);
+        
+        var settings = {
+            "url": "/displayGraphPoints/",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formGraph
+        };
+
+        $.ajax(settings).done(function (responseGraph) {
+          var responseGraphParse = JSON.parse(responseGraph)
+          console.log(responseGraphParse,"line--------134")
+          if(responseGraphParse.status=="400"){
+            console.log(responseGraphParse.message)
+            statusInserts+=`<div class="alert alert-danger" role="alert">`+responseGraphParse.message+`</div>`
+            $("#statusInsert").html(statusInserts)
+            $(".unhide").css('display','none')
+        }else{
+              console.log(responseGraphParse.message)
+              $("#statusInsert").html("")
+              $(".unhide").css('display','revert')
+              var myvideosData = responseGraphParse.myvideosData
+              console.log(myvideosData,"LINE---------138")
+
+              var results = myvideosData
+
+      // var results = responseGraphParse
+
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable(results);
+    
+          var view = new google.visualization.DataView(data);
+          view.setColumns([0, 1,
+                           { calc: "stringify",
+                             sourceColumn: 1,
+                             type: "string",
+                             role: "annotation" },
+                           2]);
+    
+          var options = {
+            title: "Keywords of the table",
+            width: 600,
+            height: 400,
+            bar: {groupWidth: "95%"},
+            legend: { position: "none" },
+          };
+          var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+          chart.draw(view, options);
+      }
+          }
+
+          
+
+    });
+    }
+
+    
+    </script>
+    {% endblock %}

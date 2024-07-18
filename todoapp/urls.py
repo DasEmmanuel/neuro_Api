@@ -1,0 +1,25 @@
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('',views.index, name = 'todo-index'),
+    path('about/', views.about, name = 'about'),
+    path('register/', views.register, name = 'register'),
+    path('registerUrl/', views.registerUrl, name = 'registerUrl'),
+    path('login/', views.login, name = 'login'),
+    path('loginUrl/', views.loginUrl, name = 'loginUrl'),
+    path('contacts/', views.contacts, name = 'contacts'),
+    path('service/', views.service, name = 'service'),
+    path('searchVideos/', views.searchVideos, name = 'searchVideos'),
+    path('individualVideos/', views.individualVideos, name = 'individualVideos'),
+    path('fileUploads/', views.fileUploads, name = 'fileUploads'),
+    path('Default_keywords/', views.Default_keywords, name = 'Default_keywords'),
+    path('add_keywords/', views.add_keywords, name = 'add_keywords'),
+    path('search_keywords/', views.search_keywords, name = 'search_keywords'),
+    path('UpdategraphKeywords/', views.UpdategraphKeywords, name = 'UpdategraphKeywords'),
+    path('delete_keywords/', views.delete_keywords, name = 'delete_keywords'),
+    path('file_keywords_update/', views.file_keywords_update, name = 'file_keywords_update'),
+    path('menu/', views.menu, name = 'menu'),
+    path('displayGraph/', views.displayGraph, name = 'displayGraph'),
+    path('displayGraphPoints/', views.displayGraphPoints, name = 'displayGraphPoints'),
+    path('help/', views.help, name = 'help'),
+]
